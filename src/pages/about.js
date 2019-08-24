@@ -1,7 +1,9 @@
 import React from "react"
 
+import Layout from "../components/globalFiles/Layout"
+
 const aboutPage = () => {
-  return <div>about Page</div>
+  return <Layout>about Page</Layout>
 }
 
 export default aboutPage
