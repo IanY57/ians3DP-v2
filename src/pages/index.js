@@ -1,12 +1,19 @@
 import React from "react"
+import AniLink from "gatsby-plugin-transition-link/AniLink"
 
 import Layout from "../components/globalFiles/Layout"
 import Hero from "../components/globalFiles/Hero"
+import Banner from "../components/globalFiles/banner"
 
 const index = ({ data }) => (
   <Layout>
-    <Hero img={data.home.childImageSharp.fluid} />
-    <h1>Index page</h1>
+    <Hero img={data.home.childImageSharp.fluid}>
+      <Banner
+        greeting="Ian's 3D"
+        title="Printing Service"
+        text="Using FDM (Fused Deposition Modeling) and PLA (Polylactic Acid) plastics"
+      ></Banner>
+    </Hero>
   </Layout>
 )
 

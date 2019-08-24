@@ -61,7 +61,7 @@ const sizes = {
   large: 1200,
   desktop: 992,
   tablet: 768,
-  phone: 572,
+  phone: 400,
 }
 export const media = Object.keys(sizes).reduce((acc, label) => {
   acc[label] = (...args) => css`
