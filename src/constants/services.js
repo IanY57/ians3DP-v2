@@ -17,6 +17,6 @@ export default [
     icon: <FaSocks />,
     title: "Printing on Demand",
     text:
-      "Designed a prototype for School or Uni project that needs to be made real.",
+      "Designed a prototype for a School or Uni project that needs to be made real.",
   },
 ]
