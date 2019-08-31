@@ -4,6 +4,8 @@ import Layout from "../components/globalFiles/Layout"
 import Hero from "../components/globalFiles/Hero"
 import Banner from "../components/globalFiles/banner"
 
+import BlogList from "../components/blogFiles/BlogList"
+
 const blog = ({ data }) => {
   return (
     <Layout>
@@ -14,6 +16,7 @@ const blog = ({ data }) => {
           text="A place to share some thoughts"
         />
       </Hero>
+      <BlogList />
     </Layout>
   )
 }
