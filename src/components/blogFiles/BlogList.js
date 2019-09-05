@@ -16,12 +16,15 @@ const BlogList = ({ className }) => {
     <div className={className}>
       <ul className="artical">
         {posts.edges.map(({ node }) => {
+          console.log(node)
+
           return (
             <div>
               <li key={node.id}>
                 <AniLink fade to="/" className="title">
                   <h2>{node.title}</h2>
                 </AniLink>
+                <p>{node.published}</p>
                 <p className="description">{node.description.description}</p>
               </li>
             </div>
@@ -38,6 +41,7 @@ const getPosts = graphql`
       edges {
         node {
           published(formatString: "Do MMMM YYYY")
+          id
           title
           description {
             description
