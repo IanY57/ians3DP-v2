@@ -1,36 +1,30 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import styled from "styled-components"
-import AniLink from "gatsby-plugin-transition-link/AniLink"
+
+import BlogCard from "./BlogCard"
 
 import {
   setRem,
   setFont,
   setFlex,
   setColor,
+  setLetterSpacing,
+  setTransition,
 } from "../../styledComponents/styles"
 
 const BlogList = ({ className }) => {
   const { posts } = useStaticQuery(getPosts)
   return (
     <div className={className}>
-      <ul className="artical">
-        {posts.edges.map(({ node }) => {
-          console.log(node)
-
-          return (
-            <div>
-              <li key={node.id}>
-                <AniLink fade to="/" className="title">
-                  <h2>{node.title}</h2>
-                </AniLink>
-                <p>{node.published}</p>
-                <p className="description">{node.description.description}</p>
-              </li>
-            </div>
-          )
-        })}
-      </ul>
+      <section className="blog">
+        {/* <Title title="Our" subtitle="Blog" /> */}
+        <div className="center">
+          {posts.edges.map(({ node }) => {
+            return <BlogCard key={node.id} blog={node} />
+          })}
+        </div>
+      </section>
     </div>
   )
 }
@@ -41,10 +35,13 @@ const getPosts = graphql`
       edges {
         node {
           published(formatString: "Do MMMM YYYY")
-          id
+          id: contentful_id
           title
-          description {
-            description
+          slug
+          image {
+            fluid {
+              ...GatsbyContentfulFluid
+            }
           }
         }
       }
@@ -53,22 +50,57 @@ const getPosts = graphql`
 `
 
 export default styled(BlogList)`
-  ${setFont.headingFont}
-  .artical {
-    text-align: center;
-    margin: ${setRem(20)};
-    list-style-type: none;
+  .blog {
+    padding: 3rem 0;
   }
-  .title {
+  .center {
+    width: 80vw;
+    margin: 2rem auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-column-gap: 2rem;
+    grid-row-gap: 2rem;
   }
-  .description {
-    ${setFont.mainFont};
+  /* .links {
+    width: 80vw;
+    margin: 0 auto 5rem auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  } */
+  /* .link {
+    text-transform: uppercase;
+    ${setLetterSpacing()};
+    background: ${setColor.primaryColor};
+    color: ${setColor.mainWhite};
+    border: 2px solid ${setColor.primaryColor};
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.5rem;
+    display: inline-block;
+    ${setTransition()};
+    cursor: pointer;
+  } */
+  /* .link:hover {
+    background: transparent;
+    color: ${setColor.primaryColor};
+  } */
+  /* .active {
+    background: ${setColor.mainWhite};
+    color: ${setColor.primaryColor};
+  } */
+
+  @media screen and (min-width: 576px) {
+    .center {
+      grid-template-columns: repeat(auto-fill, minmax(368.66px, 1fr));
+    }
+    /* .links {
+      width: 60vw;
+    } */
   }
-  a {
-    color: ${setColor.mainBlack};
-    text-decoration: none;
-    &:hover {
-      color: ${setColor.primaryColor};
+  @media screen and (min-width: 1200px) {
+    .center {
+      width: 100%;
+      max-width: 1170px;
     }
   }
 `
